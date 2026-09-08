@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools &amp; Lessons</title>
+
+<!-- Set theme class before paint to avoid a flash of the wrong theme -->
+<script>
+  (function () {
+    var stored = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (stored === 'dark' || (!stored && prefersDark)) {
+      document.documentElement.classList.add('dark');
+    }
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    darkMode: 'class',
+    theme: {
+      extend: {
+        fontFamily: {
+          display: ['Fredoka', 'ui-rounded', 'sans-serif'],
+          body: ['Nunito', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        },
+        colors: {
+          cream: {
+            DEFAULT: 'oklch(97.5% 0.018 85)',
+            dark: 'oklch(22% 0.02 60)',
+          },
+          surface: {
+            DEFAULT: 'oklch(99% 0.008 85)',
+            dark: 'oklch(27% 0.02 60)',
+          },
+          ink: {
+            DEFAULT: 'oklch(28% 0.03 60)',
+            dark: 'oklch(93% 0.01 60)',
+          },
+          'ink-muted': {
+            DEFAULT: 'oklch(45% 0.03 60)',
+            dark: 'oklch(70% 0.02 60)',
+          },
+          tool: {
+            DEFAULT: 'oklch(71% 0.19 45)',
+            text: 'oklch(55% 0.19 45)',
+            tint: 'oklch(93% 0.05 45)',
+            'tint-dark': 'oklch(32% 0.06 45)',
+          },
+          learning: {
+            DEFAULT: 'oklch(66% 0.14 210)',
+            text: 'oklch(50% 0.14 210)',
+            tint: 'oklch(93% 0.05 210)',
+            'tint-dark': 'oklch(30% 0.05 210)',
+          },
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  body { font-family: 'Nunito', ui-sans-serif, system-ui, sans-serif; }
+</style>
+</head>
+<body class="bg-cream dark:bg-cream-dark text-ink dark:text-ink-dark min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 sm:px-14 py-7 bg-surface dark:bg-surface-dark shadow-[0_2px_12px_rgba(60,40,10,0.06)] dark:shadow-[0_2px_12px_rgba(0,0,0,0.25)]">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-tool flex items-center justify-center shrink-0">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 4.9L3 17.5 5.5 20l6.3-6.3a4 4 0 0 0 4.9-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="white" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>
+      </div>
+      <span class="font-display font-bold text-2xl">Tools &amp; Lessons</span>
+    </div>
+
+    <!-- Theme toggle: pill switch with sliding sun/moon knob -->
+    <button id="theme-toggle" type="button" aria-label="Toggle dark mode"
+      class="relative w-16 h-9 rounded-full bg-tool-tint dark:bg-tool-tint-dark p-[3px] transition-colors">
+      <span id="toggle-knob"
+        class="block w-7 h-7 rounded-full bg-white dark:bg-surface-dark shadow-[0_2px_6px_rgba(60,40,10,0.18)] flex items-center justify-center transition-transform duration-200 dark:translate-x-[30px]">
+        <svg id="icon-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" class="dark:hidden">
+          <circle cx="12" cy="12" r="5" stroke="oklch(65% 0.19 45)" stroke-width="2.5"/>
+          <path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="oklch(65% 0.19 45)" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <svg id="icon-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" class="hidden dark:block">
+          <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke="oklch(93% 0.01 60)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+
+  <main class="flex-1 px-6 sm:px-14 py-14">
+
+    <!-- Gallery view -->
+    <section id="gallery-view">
+      <h1 class="font-display font-bold text-3xl sm:text-4xl mb-2">Browse tools &amp; lessons</h1>
+      <p class="text-lg text-ink-muted dark:text-ink-muted-dark mb-10 max-w-xl">A growing pile of small things to play with and learn from. New ones show up here as they're built.</p>
+
+      <div id="tool-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 max-w-4xl"></div>
+
+      <p class="mt-12 text-sm text-ink-muted dark:text-ink-muted-dark">More tools and lessons are on the way.</p>
+    </section>
+
+    <!-- Tool view (hidden until a card is opened) -->
+    <section id="tool-view" class="hidden max-w-3xl">
+      <button id="back-button" type="button"
+        class="flex items-center gap-2 font-extrabold text-sm text-ink-muted dark:text-ink-muted-dark mb-8 hover:opacity-80">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back to tools
+      </button>
+      <div id="tool-content"></div>
+    </section>
+
+  </main>
+
+  <footer class="px-6 sm:px-14 py-8 text-sm text-ink-muted dark:text-ink-muted-dark">
+    &copy; Tools &amp; Lessons
+  </footer>
+
+  <script>
+    // ---- Theme toggle ----
+    var themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', function () {
+      var isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // ---- Category styling ----
+    var CATEGORY_STYLES = {
+      tool: {
+        label: 'Tool',
+        badgeBg: 'bg-tool',
+        tagText: 'text-tool-text',
+        tagBg: 'bg-tool-tint dark:bg-tool-tint-dark',
+        linkText: 'text-tool-text',
+      },
+      learning: {
+        label: 'Learning',
+        badgeBg: 'bg-learning',
+        tagText: 'text-learning-text',
+        tagBg: 'bg-learning-tint dark:bg-learning-tint-dark',
+        linkText: 'text-learning-text',
+      },
+    };
+
+    var ICONS = {
+      tool: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M14.7 6.3a4 4 0 0 0-5.4 4.9L3 17.5 5.5 20l6.3-6.3a4 4 0 0 0 4.9-5.4l-2.6 2.6-2-2 2.6-2.6Z" stroke="white" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/></svg>',
+      learning: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v16H5.5A1.5 1.5 0 0 1 4 18.5v-13ZM20 5.5c0-.8-.7-1.5-1.5-1.5H13v16h5.5a1.5 1.5 0 0 0 1.5-1.5v-13Z" stroke="white" stroke-width="2.2" stroke-linejoin="round"/></svg>',
+    };
+
+    // ---- Placeholder tool renderer (shell only — no real tool logic yet) ----
+    function renderPlaceholder(tool, container) {
+      var style = CATEGORY_STYLES[tool.category];
+      container.innerHTML =
+        '<span class="inline-block text-xs font-extrabold uppercase tracking-wide ' + style.tagText + ' ' + style.tagBg + ' px-2.5 py-1 rounded-full mb-4">' + style.label + '</span>' +
+        '<h1 class="font-display font-bold text-3xl sm:text-4xl mb-2">' + tool.title + '</h1>' +
+        '<p class="text-ink-muted dark:text-ink-muted-dark mb-8">' + tool.description + '</p>' +
+        '<div class="bg-surface dark:bg-surface-dark rounded-3xl shadow-[0_8px_24px_rgba(60,40,10,0.08)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.3)] p-10 text-center">' +
+          '<div class="w-14 h-14 rounded-2xl ' + style.badgeBg + ' mx-auto mb-4 flex items-center justify-center">' + ICONS[tool.category] + '</div>' +
+          '<p class="font-display font-bold text-lg mb-1">Coming soon</p>' +
+          '<p class="text-ink-muted dark:text-ink-muted-dark text-sm">This tool\'s logic hasn\'t been built yet — you\'re looking at the placeholder shell.</p>' +
+        '</div>';
+    }
+
+    // ---- Tool registry (Phase 1: shell + placeholders, no real logic) ----
+    var TOOLS = [
+      {
+        id: 'word-counter',
+        title: 'Word & Character Counter',
+        description: 'Paste text and watch word, character, and sentence counts update live.',
+        category: 'tool',
+        render: renderPlaceholder,
+      },
+      {
+        id: 'quiz',
+        title: 'Quick Quiz',
+        description: 'A short multiple-choice quiz with instant feedback and a running score.',
+        category: 'learning',
+        render: renderPlaceholder,
+      },
+    ];
+
+    // ---- Gallery rendering ----
+    var toolGrid = document.getElementById('tool-grid');
+    TOOLS.forEach(function (tool) {
+      var style = CATEGORY_STYLES[tool.category];
+      var card = document.createElement('button');
+      card.type = 'button';
+      card.dataset.toolId = tool.id;
+      card.className = 'text-left flex flex-col gap-4 bg-surface dark:bg-surface-dark rounded-3xl p-7 shadow-[0_8px_24px_rgba(60,40,10,0.08)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.3)] hover:opacity-90 transition-opacity';
+      card.innerHTML =
+        '<div class="w-12 h-12 rounded-2xl ' + style.badgeBg + ' flex items-center justify-center">' + ICONS[tool.category] + '</div>' +
+        '<div class="flex flex-col gap-2.5 flex-grow">' +
+          '<span class="self-start text-xs font-extrabold uppercase tracking-wide ' + style.tagText + ' ' + style.tagBg + ' px-2.5 py-1 rounded-full">' + style.label + '</span>' +
+          '<span class="font-display font-bold text-xl">' + tool.title + '</span>' +
+          '<span class="text-sm leading-relaxed text-ink-muted dark:text-ink-muted-dark">' + tool.description + '</span>' +
+        '</div>' +
+        '<span class="flex items-center gap-1.5 font-extrabold text-sm ' + style.linkText + '">Open &rarr;</span>';
+      card.addEventListener('click', function () { openTool(tool.id); });
+      toolGrid.appendChild(card);
+    });
+
+    // ---- View switcher ----
+    var galleryView = document.getElementById('gallery-view');
+    var toolView = document.getElementById('tool-view');
+    var toolContent = document.getElementById('tool-content');
+    var backButton = document.getElementById('back-button');
+
+    function openTool(id) {
+      var tool = TOOLS.find(function (t) { return t.id === id; });
+      if (!tool) return;
+      tool.render(tool, toolContent);
+      galleryView.classList.add('hidden');
+      toolView.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function closeTool() {
+      toolView.classList.add('hidden');
+      galleryView.classList.remove('hidden');
+      toolContent.innerHTML = '';
+    }
+
+    backButton.addEventListener('click', closeTool);
+  </script>
+</body>
+</html>

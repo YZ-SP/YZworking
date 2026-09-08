@@ -99,18 +99,20 @@ markup/logic), with no changes needed to the gallery or switcher.
 Scope: shell (header incl. theme toggle, gallery, view-switcher) + exactly
 two entries, one per category.
 
-- Shell: header with site title + theme toggle, gallery view, tool view
-  container, footer.
-- Tool registry (`TOOLS` array) + gallery rendering + view-switcher, per
-  data model/flows above.
-- Entry 1 (`category: 'tool'`) — **Word & Character Counter**: textarea
-  input; live word / character / character-without-spaces / sentence
-  counts on input.
-- Entry 2 (`category: 'learning'`) — **Quick Quiz**: small hardcoded
-  multiple-choice question set, one question at a time, instant
-  right/wrong feedback, running score, restart at end. No persistence —
-  resets on reload.
-- Theme toggle wired to `localStorage`.
+- ✅ done — Shell: header with site title + theme toggle, gallery view,
+  tool view container, footer. Styled per Design Direction.
+- ✅ done — Tool registry (`TOOLS` array) + gallery rendering +
+  view-switcher, per data model/flows above. Each entry currently
+  renders a placeholder ("coming soon") shell rather than real logic —
+  proves the open/close navigation pattern works.
+- ✅ done — Theme toggle wired to `localStorage`, applied before paint.
+- Entry 1 (`category: 'tool'`) — **Word & Character Counter**: still a
+  placeholder. Real logic to add: textarea input; live word / character
+  / character-without-spaces / sentence counts on input.
+- Entry 2 (`category: 'learning'`) — **Quick Quiz**: still a
+  placeholder. Real logic to add: small hardcoded multiple-choice
+  question set, one question at a time, instant right/wrong feedback,
+  running score, restart at end. No persistence — resets on reload.
 
 ### Phase 2+ — grow the collection (not yet planned in detail)
 

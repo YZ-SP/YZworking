@@ -129,41 +129,33 @@ two entries, one per category.
 - Revisit the registry pattern only if it needs to change (e.g.
   filtering/search across categories once the list grows long).
 
-#### Mini-Course tool (`category: 'learning'`) — in progress
+#### Mini-Course tool (`category: 'learning'`) — ✅ done
 
-A one-time build turning a specific set of 3-5 slides (supplied by the
-user as images, not a visitor-upload feature) into a mini-course: one
-lesson section per slide, rewritten as normal course prose rather than
-slide bullet points.
+**Simple Bending Theory** — a one-time build turning 3 source slides
+(beam bending/neutral axis theory, the bending equation, a worked
+I-beam example) into a 3-section mini-course, each section rewritten
+as course prose rather than a slide transcript, with diagrams
+recreated as inline SVG.
 
-- ✅ done — Visual direction chosen: **"Modern Study"** — its own
-  distinct visual system, not the portal's Playful Design Direction
-  (same kind of explicit exception as the Beam Load Visualizer, for
-  the same reason: this content benefits from its own reading-focused
-  look). Chosen from a 3-direction design proposal (Warm Editorial /
-  Modern Study / Classic Library).
-  - Fonts: `Space Grotesk` (display/headings) + `Source Sans 3` (body),
-    Google Fonts via CDN link.
-  - Palette: cool neutral background oklch(98% 0.003 250), ink text
-    oklch(20% 0.01 250), indigo accent oklch(55% 0.16 265). Dark mode:
-    background oklch(16% 0.01 250), text oklch(92% 0.005 250), accent
-    oklch(72% 0.14 265) — wired to the site's shared `dark` class
-    (like the Beam Load Visualizer's `.dark` scoping), not an
-    independent light/dark toggle.
-  - Layout: fixed left sidebar (~280px) — course title, a progress
-    indicator (fraction + thin bar), and the section list (numbered
-    circle per section; filled + checkmark once viewed/completed,
-    outlined for current/upcoming, current section bold with a tinted
-    background) — plus a centered reading pane (~720px max width) with
-    a "Section N of M" eyebrow, heading, prose, and Prev/"mark
-    complete & continue" controls at the bottom.
-- Not started — actual lesson content: waiting on the user to share
-  the 3-5 source slides (as images) before rewriting each into a
-  section and recreating any diagrams as inline SVG.
-- Not started — progress persistence: which sections a visitor has
-  viewed/completed, saved to `localStorage` (own key, independent of
-  the theme toggle's key), read back to restore checkmarks/progress
-  bar on return visits.
-- Not started — sidebar navigation wiring: clicking any section title
-  jumps straight to it (not linear-only), consistent with the sidebar
-  mockup.
+- Visual direction: **"Modern Study"** — its own distinct visual
+  system (`Space Grotesk` + `Source Sans 3`, cool/indigo palette,
+  scoped under `.course-tool` in `<head>`), not the portal's Playful
+  Design Direction — the same kind of explicit exception as the Beam
+  Load Visualizer, chosen from a 3-direction design proposal. Dark
+  mode wired to the site's shared `.dark` class (`.dark .course-tool`),
+  not an independent toggle.
+- Layout: fixed left sidebar (course title, progress fraction + bar,
+  section list with numbered/checkmark circles, current section
+  highlighted) + a reading pane with a "Section N of M" eyebrow,
+  heading, prose, and Prev / "Mark complete & continue" controls.
+- Sidebar items are clickable to jump to any section (not linear-only).
+- Progress (completed sections + last-viewed section) persists to
+  `localStorage` under its own `course-progress:simple-bending-theory`
+  key, independent of the theme toggle's key — reopening the tool
+  resumes on the last-viewed section with checkmarks restored.
+- Fixed a layout bug found while building this: `#tool-view` had a
+  `max-w-3xl` cap that would have squeezed this tool's (and the Beam
+  Load Visualizer's) wide sidebar+content layout. Removed it from the
+  shared container; `renderPlaceholder` now sets its own inner
+  `max-w-3xl` instead, so narrower placeholder tools keep the same
+  reading width they had before.

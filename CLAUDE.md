@@ -16,6 +16,39 @@ This file provides guidance to Claude when working with code in this repository.
 - A toggle for light and dark theme, with the choice remembered
   across visits.
 
+## Design Direction
+
+Chosen visual direction ("Option A — Playful & colorful" from the design
+canvas proposal). This is a standing rule: apply it to everything already
+built and to every tool/lesson added later, so the collection stays
+visually consistent without re-deciding style each time.
+
+- **Fonts** — Google Fonts via CDN link, two-font pairing:
+  - Display/headings: `Fredoka` (weights 500/700), fallback `ui-rounded, sans-serif`.
+  - Body/UI text: `Nunito` (weights 400/600/800), fallback `ui-sans-serif, system-ui, sans-serif`.
+- **Palette** — warm, cream-based, not stark white/gray:
+  - Page background: warm cream (`oklch(97.5% 0.018 85)`).
+  - Card/surface background: near-white warm tint (`oklch(99% 0.008 85)`).
+  - Body text: warm dark gray (`oklch(28% 0.03 60)`), muted text (`oklch(45% 0.03 60)`).
+  - Category accents — one hue per category, same lightness/chroma family, only hue changes:
+    - `tool` → coral/orange (`oklch(70–72% 0.19 45)`).
+    - `learning` → teal/blue (`oklch(65–66% 0.14 210)`).
+  - Each accent gets a light tint background (`oklch(93% 0.05 <hue>)`) for badges/stat tiles.
+- **Shape & spacing** — rounded and generous, not sharp/dense:
+  - Large corner radii: 24px on cards/textareas, 14–16px on icon badges/stat tiles, full pill (999px) on tags and the theme toggle.
+  - Soft drop shadows on cards/header (`0 8px 24px rgba(60,40,10,0.08)` style), no hard borders.
+  - Generous padding: ~28px card padding, ~56px page padding, gap ≈ 24–28px between grid items.
+- **Header** — site title "Tools & Lessons" in Fredoka bold next to a small colored icon badge; theme toggle rendered as a pill switch with a sun/moon icon inside a sliding knob (not a plain checkbox).
+- **Cards** — icon badge (colored square, rounded) → category pill tag (colored text on tinted background) → title (Fredoka bold) → description (Nunito, muted) → "Open →" link in the accent color.
+- **Icons** — simple rounded-stroke inline SVGs (stroke width ~2.2–2.5, rounded line caps/joins), never emoji.
+
+### Applying this later
+
+Every new `TOOLS` entry picks one existing category accent (or, if a
+genuinely new category is introduced, a new hue at the same
+lightness/chroma as the existing accents) and reuses the same card
+anatomy, fonts, radii, and spacing above — no per-tool restyling.
+
 ## Working conventions
 - Before implementing any non-trivial feature, ask clarifying
   questions about scope, edge cases, and constraints first —

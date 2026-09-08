@@ -106,9 +106,18 @@ two entries, one per category.
   renders a placeholder ("coming soon") shell rather than real logic —
   proves the open/close navigation pattern works.
 - ✅ done — Theme toggle wired to `localStorage`, applied before paint.
-- Entry 1 (`category: 'tool'`) — **Word & Character Counter**: still a
-  placeholder. Real logic to add: textarea input; live word / character
-  / character-without-spaces / sentence counts on input.
+- ✅ done — Entry 1 (`category: 'tool'`) — **Beam Load Visualizer**
+  (replaces the originally-planned Word & Character Counter): fully
+  functional — add point/axial/torque loads to a beam and see live
+  stress, deflection, and twist diagrams. Deliberately keeps its own
+  visual system (IBM Plex fonts, blue-gray engineering palette, scoped
+  under `.beam-tool` in `<head>`) instead of the site Design Direction —
+  an explicit exception, decided when this tool was added, because the
+  tool benefits from a distinct "instrument panel" feel. Only the
+  shared header/back-button/page chrome around it follows Design
+  Direction. Its dark mode is wired to the site's shared toggle (styled
+  via `.dark .beam-tool` rather than its own independent light/dark
+  detection).
 - Entry 2 (`category: 'learning'`) — **Quick Quiz**: still a
   placeholder. Real logic to add: small hardcoded multiple-choice
   question set, one question at a time, instant right/wrong feedback,
